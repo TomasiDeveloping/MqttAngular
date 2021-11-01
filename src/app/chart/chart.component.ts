@@ -25,7 +25,7 @@ export class ChartComponent implements OnInit, OnChanges {
   public chartData = [
     {data: this.inputData, label: this.sensorName}
   ];
-  public lineChartColors: Color[] = [
+  public chartColors: Color[] = [
     { // grey
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
