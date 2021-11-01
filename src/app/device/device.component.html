@@ -1,0 +1,35 @@
+<h3>{{deviceName}}</h3>
+<ng-template [ngIf]="!currentMessage">
+  <p>NO DATA</p>
+</ng-template>
+<!--Bootstrap Card for Device-->
+<ng-template [ngIf]="currentMessage">
+  <div class="card text-center">
+    <div class="card-header text-white bg-secondary">
+      {{currentMessage.name}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{currentMessage.value}}</h5>
+      <p class="card-text">{{currentMessage.unit}}</p>
+    </div>
+    <div class="card-footer text-muted">
+      {{currentMessage.timeStamp | date: 'dd.MM.yyyy HH:mm:ss'}}
+    </div>
+  </div>
+</ng-template>
+<button (click)="onHistory()"
+        class="btn btn-secondary btn-sm mt-2">{{showHistory ? 'Hide History' : 'Show History'}}</button>
+<!--History with char-->
+<ng-template [ngIf]="showHistory">
+  <ng-template [ngIf]="devices.length > 0">
+    <app-chart
+      [inputData]="chartValues"
+      [inputLabels]="chartLabels"
+      [sensorName]="currentMessage?.unit">
+    </app-chart>
+    <button (click)="onClearHistory()" class="btn btn-outline-danger btn-sm">Clear History</button>
+  </ng-template>
+  <ng-template [ngIf]="devices.length === 0">
+    <p>NO DATA</p>
+  </ng-template>
+</ng-template>
