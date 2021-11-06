@@ -1,16 +1,16 @@
 <div class="container">
   <h1 class="text-center">MQTT - Dashboard</h1>
-<!--  EXAMPLE WITH TWO TOPICS-->
   <app-device
-    [deviceName]="'YOUR_DEVICE_NAME'"
-    [topic]="'YOUR_TOPIC'"
-    [unit]="'YOUR_UNIT'">
+    [deviceName]="'CO2 - Sensor'"
+    [topic]="'CO2Sensor/#'"
+    [unit]="'PPM'">
   </app-device>
   <hr>
   <app-device
-    [deviceName]="'YOUR_DEVICE_NAME'"
-    [topic]="'YOUR_TOPIC'"
-    [unit]="'YOUR_UNIT'">
+    [deviceName]="'Feinstaub Meerschweinchen'"
+    [topic]="'luftdaten/Meerschweinchen/PM10'"
+    [unit]="'µm/m3'">
   </app-device>
+  <app-motion-detected></app-motion-detected>
 </div>
 

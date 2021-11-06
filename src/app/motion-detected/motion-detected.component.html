@@ -1,0 +1,20 @@
+<h3>{{currentMessage?.name}}</h3>
+<ng-template [ngIf]="!currentMessage">
+  <p>NO DATA</p>
+</ng-template>
+<!--Bootstrap Card for Device-->
+<ng-template [ngIf]="currentMessage">
+  <div class="card text-center">
+    <div class="card-header text-white bg-secondary">
+      {{currentMessage.name}}
+    </div>
+    <div class="card-body bg-success" [ngClass]="{'bg-danger': currentMessage.value === '1'}">
+      <h5 class="card-title">{{currentMessage.value}}</h5>
+      <p class="card-text">{{currentMessage.unit}}</p>
+    </div>
+    <div class="card-footer text-muted">
+      {{currentMessage.timeStamp | date: 'dd.MM.yyyy HH:mm:ss'}}
+    </div>
+  </div>
+</ng-template>
+

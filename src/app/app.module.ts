@@ -8,12 +8,15 @@ import {environment} from "../environments/environment";
 import {DeviceComponent} from './device/device.component';
 import {ChartsModule} from "ng2-charts";
 import {ChartComponent} from './chart/chart.component';
+import { MotionDetectedComponent } from './motion-detected/motion-detected.component';
+
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.hostname,
   port: environment.port,
-  protocol: 'ws',
-  path: '/mqtt',
+  // @ts-ignore
+  protocol: environment.protocol,
+  path: environment.path,
   // Only for MQTT brokers with authentication
   username: environment.username,
   password: environment.password
@@ -23,7 +26,8 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   declarations: [
     AppComponent,
     DeviceComponent,
-    ChartComponent
+    ChartComponent,
+    MotionDetectedComponent
   ],
   imports: [
     BrowserModule,
