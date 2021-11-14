@@ -8,7 +8,7 @@ export const environment = {
   hostname: 'YOUR_BROKER_HOSTNAME',
   port: 8083,
   protocol: 'wss',
-  path: 'mqtt',
+  path: '/mqtt',
   // ONLY FOR MQTT BROKERS WITH AUTHENTICATION
   username: 'YOUR_USERNAME',
   password: 'YOUR_PASSWORD',
