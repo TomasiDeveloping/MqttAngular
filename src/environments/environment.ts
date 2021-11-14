@@ -10,7 +10,7 @@ export const environment = {
   protocol: 'ws',
   username: 'YOUR_USERNAME',
   password: 'YOUR_PASSWORD',
-  path: 'mqtt',
+  path: '/mqtt',
   // MQTT Endpoint
   mqttEndpoint: 'YOUR_ENDPOINT'
 };
