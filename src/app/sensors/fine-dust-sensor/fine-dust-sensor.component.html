@@ -1,0 +1,54 @@
+<h3>{{deviceName}}</h3>
+<ng-template [ngIf]="!currentMessage">
+  <p class="text-center text-uppercase">No current data received from broker</p>
+</ng-template>
+<!--Bootstrap Card for Device-->
+<ng-template [ngIf]="currentMessage">
+  <div class="card text-center">
+    <div class="card-header text-white bg-secondary">
+      {{currentMessage.name}}
+    </div>
+    <div class="card-body">
+      <h6 *ngIf="currentPM10Value" class="card-title">PM10</h6>
+      <h5 *ngIf="currentPM10Value" class="card-title">{{currentPM10Value}}</h5>
+      <p class="card-text">{{currentMessage.unit}}</p>
+    </div>
+    <div class="card-body">
+      <h6 *ngIf="currentPM25Value" class="card-title">PM2.5</h6>
+      <h5 *ngIf="currentPM25Value" class="card-title">{{currentPM25Value}}</h5>
+      <p class="card-text">{{currentMessage.unit}}</p>
+    </div>
+    <div class="card-footer text-muted">
+      {{currentMessage.timeStamp | date: 'dd.MM.yyyy HH:mm:ss'}}
+    </div>
+  </div>
+  <ng-template [ngIf]="showDescription">
+    <p><strong>Feinstaub (PM10, PM2.5)</strong></p>
+    <p>Unter der Bezeichnung PM10 versteht man Partikel mit einem aerodynamischen Durchmesser
+      kleiner gleich 10 Mikrometer. PM2.5 sind Partikel kleiner gleich 2.5 Mikrometer.
+      Es handelt sich bei PM10 sowie PM2.5 um die sogenannten lungengängigen Partikel, d.h.
+      dass sie in die feinen Lungenbläschen hineingelangen. Deshalb gilt ihnen eine erhöhte Aufmerksamkeit.
+    </p>
+  </ng-template>
+</ng-template>
+<ng-template [ngIf]="currentMessage">
+  <button (click)="showDescription = !showDescription"
+          class="btn btn-info btn-sm mt-2 d-block">{{showDescription ? 'Hide Description' : 'Show Description'}}</button>
+  <button (click)="onHistory()"
+          class="btn btn-secondary btn-sm mt-2">{{showHistory ? 'Hide History' : 'Show History'}}</button>
+</ng-template>
+<!--History with char-->
+<ng-template [ngIf]="showHistory">
+  <ng-template [ngIf]="devices.length > 0">
+    <app-chart
+      [inputData]="chartValues"
+      [inputLabels]="chartLabels"
+      [sensorName]="currentMessage?.unit">
+    </app-chart>
+    <button (click)="onClearHistory()" class="btn btn-outline-danger btn-sm">Clear History</button>
+  </ng-template>
+  <ng-template [ngIf]="devices.length === 0">
+    <p>NO DATA</p>
+  </ng-template>
+</ng-template>
+

@@ -3,7 +3,6 @@ import {IMqttMessage, MqttService} from "ngx-mqtt";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 
-
 @Injectable({
   providedIn: 'root'
 })

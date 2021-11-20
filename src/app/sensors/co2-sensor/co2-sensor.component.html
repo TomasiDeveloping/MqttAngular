@@ -1,6 +1,6 @@
 <h3>{{deviceName}}</h3>
 <ng-template [ngIf]="!currentMessage">
-  <p>NO DATA</p>
+  <p class="text-center text-uppercase">No current data received from broker</p>
 </ng-template>
 <!--Bootstrap Card for Device-->
 <ng-template [ngIf]="currentMessage">
@@ -8,17 +8,29 @@
     <div class="card-header text-white bg-secondary">
       {{currentMessage.name}}
     </div>
-    <div class="card-body">
+    <div [ngStyle]="{'background-color': getColor(+currentMessage.value)}" class="card-body">
       <h5 class="card-title">{{currentMessage.value}}</h5>
       <p class="card-text">{{currentMessage.unit}}</p>
+      <p class="card-text">{{coMessage}}</p>
     </div>
     <div class="card-footer text-muted">
       {{currentMessage.timeStamp | date: 'dd.MM.yyyy HH:mm:ss'}}
     </div>
   </div>
+  <ng-template [ngIf]="showDescription">
+    <p><strong>Richtwert 1.000 ppm</strong></p>
+    <p>
+      Ziel sollte sein, einen CO2-Wert von 1.000 ppm nicht zu überschreiten.
+      1.400 ppm ist die obere Grenze für akzeptable Raumluft. Um dies zu erreichen,
+      muss im Normalfall alle 1 bis 2 Stunden aktiv gelüftet werden.
+    </p>
+  </ng-template>
+  <button (click)="showDescription = !showDescription"
+          class="btn btn-info btn-sm mt-2 d-block">{{showDescription ? 'Hide Description' : 'Show Description'}}</button>
+
+  <button (click)="onHistory()"
+          class="btn btn-secondary btn-sm mt-2">{{showHistory ? 'Hide History' : 'Show History'}}</button>
 </ng-template>
-<button (click)="onHistory()"
-        class="btn btn-secondary btn-sm mt-2">{{showHistory ? 'Hide History' : 'Show History'}}</button>
 <!--History with char-->
 <ng-template [ngIf]="showHistory">
   <ng-template [ngIf]="devices.length > 0">

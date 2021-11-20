@@ -1,19 +1,17 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {DeviceModel} from "../models/device.model";
+import {DeviceModel} from "../../models/device.model";
 import {Subscription} from "rxjs";
-import {EventMqttService} from "../services/event-mqtt.service";
+import {EventMqttService} from "../../services/event-mqtt.service";
 import {IMqttMessage} from "ngx-mqtt";
 
 @Component({
-  selector: 'app-device',
-  templateUrl: './device.component.html',
-  styleUrls: ['./device.component.css']
+  selector: 'app-fine-dust-sensor',
+  templateUrl: './fine-dust-sensor.component.html',
+  styleUrls: ['./fine-dust-sensor.component.css']
 })
-export class DeviceComponent implements OnInit, OnDestroy {
-
+export class FineDustSensorComponent implements OnInit, OnDestroy {
   @Input() deviceName: string = '';
   @Input() topic: string = '';
-  @Input() unit: string = '';
 
   devices: DeviceModel[] = [];
   currentMessage: DeviceModel | undefined;
@@ -21,6 +19,10 @@ export class DeviceComponent implements OnInit, OnDestroy {
   showHistory = false;
   chartValues: string[] = [];
   chartLabels: string[] = [];
+  unit = 'µm/m3';
+  currentPM25Value = '';
+  currentPM10Value = '';
+  showDescription = true;
 
   constructor(private readonly mqttService: EventMqttService) {
   }
@@ -56,6 +58,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
         }
         device.name = this.deviceName;
         device.unit = this.unit;
+        if (data.topic.includes('PM10')) {
+          this.currentPM10Value = data.payload.toString();
+        } else {
+          this.currentPM25Value = data.payload.toString();
+        }
         device.value = data.payload.toString();
         this.currentMessage = device;
         this.devices.push(device);

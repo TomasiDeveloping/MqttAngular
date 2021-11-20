@@ -8,7 +8,7 @@
     <div class="card-header text-white bg-secondary">
       {{currentMessage.name}}
     </div>
-    <div class="card-body bg-success" [ngClass]="{'bg-danger': currentMessage.value === '1'}">
+    <div [ngClass]="{'bg-danger': currentMessage.value === '1'}" class="card-body bg-success">
       <h5 class="card-title">{{currentMessage.value}}</h5>
       <p class="card-text">{{currentMessage.unit}}</p>
     </div>
@@ -17,4 +17,3 @@
     </div>
   </div>
 </ng-template>
-

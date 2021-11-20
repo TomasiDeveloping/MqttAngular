@@ -1,16 +1,19 @@
-<div class="container">
+<div class="container mb-4">
   <h1 class="text-center">MQTT - Dashboard</h1>
-  <app-device
+  <app-co2-sensor
     [deviceName]="'CO2 - Sensor'"
-    [topic]="'CO2Sensor/#'"
-    [unit]="'PPM'">
-  </app-device>
+    [topic]="'CO2Sensor/#'">
+  </app-co2-sensor>
   <hr>
-  <app-device
-    [deviceName]="'Feinstaub Meerschweinchen'"
-    [topic]="'luftdaten/Meerschweinchen/PM10'"
-    [unit]="'µm/m3'">
-  </app-device>
-  <app-motion-detected></app-motion-detected>
+  <app-co2-sensor
+    [deviceName]="'CO2 - Büro'"
+    [topic]="'C02_Buero/PPM'">
+  </app-co2-sensor>
+  <!--  <app-motion-detected></app-motion-detected>-->
+  <hr>
+  <app-fine-dust-sensor
+    [deviceName]="'Feinstaub - Zimmer 3'"
+    [topic]="'luftdaten/Meerschweinchen/#'">
+  </app-fine-dust-sensor>
 </div>
 
