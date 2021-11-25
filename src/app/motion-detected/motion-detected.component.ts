@@ -29,7 +29,7 @@ export class MotionDetectedComponent implements OnInit, OnDestroy {
       if (this.currentMessage) {
         this.currentMessage.value = '0';
       }
-    }, 30000)
+    }, 10000)
   }
 
   cleatTimeOut() {
@@ -46,7 +46,7 @@ export class MotionDetectedComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToTopic() {
-    this.subscription = this.mqttService.topic('PIR/State')
+    this.subscription = this.mqttService.topic('Radar/State')
       .subscribe((data: IMqttMessage) => {
         let device: DeviceModel = new class implements DeviceModel {
           name = '';

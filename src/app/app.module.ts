@@ -10,6 +10,7 @@ import {ChartComponent} from './chart/chart.component';
 import {MotionDetectedComponent} from './motion-detected/motion-detected.component';
 import {Co2SensorComponent} from './sensors/co2-sensor/co2-sensor.component';
 import {FineDustSensorComponent} from './sensors/fine-dust-sensor/fine-dust-sensor.component';
+import { TemperatureSensorComponent } from './sensors/temperature-sensor/temperature-sensor.component';
 
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
@@ -29,7 +30,8 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     ChartComponent,
     MotionDetectedComponent,
     Co2SensorComponent,
-    FineDustSensorComponent
+    FineDustSensorComponent,
+    TemperatureSensorComponent
   ],
   imports: [
     BrowserModule,

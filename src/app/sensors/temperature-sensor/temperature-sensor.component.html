@@ -1,0 +1,45 @@
+<h3>{{deviceName}}</h3>
+<ng-template [ngIf]="!currentMessage">
+  <p class="text-center text-uppercase">No current data received from broker</p>
+</ng-template>
+<!--Bootstrap Card for Device-->
+<ng-template [ngIf]="currentMessage">
+  <div class="card text-center">
+    <div class="card-header text-white bg-secondary">
+      {{currentMessage.name}}
+    </div>
+    <div class="card-body">
+      <h6 *ngIf="currentTemperature" class="card-title">Temperatur</h6>
+      <h5 *ngIf="currentTemperature" class="card-title">{{currentTemperature}}{{unitTemp}}</h5>
+<!--      <p class="card-text">{{unitTemp}}</p>-->
+    </div>
+    <div class="card-body">
+      <h6 *ngIf="currentPressure" class="card-title">Luftdruck</h6>
+      <h5 *ngIf="currentPressure" class="card-title">{{currentPressure}} {{unitPressure}}</h5>
+<!--      <p class="card-text">{{unitPressure}}</p>-->
+    </div>
+    <div class="card-footer text-muted">
+      {{currentMessage.timeStamp | date: 'dd.MM.yyyy HH:mm:ss'}}
+    </div>
+  </div>
+</ng-template>
+<ng-template [ngIf]="currentMessage">
+  <button (click)="onHistory()"
+          class="btn btn-secondary btn-sm mt-2">{{showHistory ? 'Hide History' : 'Show History'}}</button>
+</ng-template>
+<!--History with char-->
+<ng-template [ngIf]="showHistory">
+  <ng-template [ngIf]="devices.length > 0">
+    <app-chart
+      [inputData]="chartValues"
+      [inputLabels]="chartLabels"
+      [sensorName]="currentMessage?.unit">
+    </app-chart>
+    <button (click)="onClearHistory()" class="btn btn-outline-danger btn-sm">Clear History</button>
+  </ng-template>
+  <ng-template [ngIf]="devices.length === 0">
+    <p>NO DATA</p>
+  </ng-template>
+</ng-template>
+
+
